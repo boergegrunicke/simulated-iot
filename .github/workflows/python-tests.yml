@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # Teste gegen die Versionen, die HA aktuell unterstützt
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13"]
 
     steps:
     - name: Code auschecken
