@@ -29,3 +29,24 @@ This library provides a simple, asynchronous simulation of IoT devices. It is es
 - `Heating Mode` (select: Eco, Comfort, Boost)
 
 For more details and the API, see the module `iot_simulator/hub.py`.
+
+---
+
+## Example Client
+
+To get started quickly, see the provided `example_client.py` file. This script demonstrates how to:
+
+- Register for device state updates using a callback
+- Manually control device states
+- Enable or disable simulation for individual devices
+- Run the simulation loop and receive updates asynchronously
+
+### Usage
+
+Run the example client with:
+
+```bash
+python example_client.py
+```
+
+This will print the initial device states and show updates as they occur. You can use the code in `example_client.py` as a template for your own integration or testing.
