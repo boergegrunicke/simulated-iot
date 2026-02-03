@@ -1,3 +1,28 @@
+def test_background_update_once(monkeypatch):
+    """Testet die Logik von _background_update_once für alle Gerätetypen."""
+    import random
+    hub = SimulatedHub()
+    called = []
+    hub.register_callback(lambda device_id, state: called.append((device_id, state)))
+    # Sensor: temp_1
+    hub.devices["temp_1"].state = 20.0
+    # Switch: light_1
+    hub.devices["light_1"].state = False
+    # Select: mode_1
+    hub.devices["mode_1"].state = "Eco"
+    # Patch random.uniform und random.random
+    monkeypatch.setattr(random, "uniform", lambda a, b: 0.2)
+    monkeypatch.setattr(random, "random", lambda: 1.0)  # Switch toggelt immer
+    hub._background_update_once()
+    # Sensor sollte geändert werden
+    assert hub.devices["temp_1"].state == 20.2
+    # Switch sollte toggeln
+    assert hub.devices["light_1"].state is True
+    # Select sollte nicht geändert werden (keine Logik)
+    assert hub.devices["mode_1"].state == "Eco"
+    # Callbacks sollten für temp_1 und light_1 gefeuert werden
+    assert ("temp_1", 20.2) in called
+    assert ("light_1", True) in called
 import pytest
 import asyncio
 from iot_simulator import SimulatedHub
