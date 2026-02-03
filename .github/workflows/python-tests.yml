@@ -26,10 +26,15 @@ jobs:
     - name: Abhängigkeiten installieren
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-asyncio
-        # Installiert deine Library im Editiermodus für die Tests
+        pip install pytest pytest-asyncio pytest-cov
+        # Installs the library in editable mode
         pip install -e .
 
-    - name: Tests mit pytest ausführen
+    - name: Run tests with pytest and generate coverage report
       run: |
-        pytest
+        PYTHONPATH=. pytest --cov=iot_simulator tests/
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
