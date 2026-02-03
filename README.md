@@ -2,6 +2,7 @@
 Tiny simulator, that is inteded to simulate iot devices for testing purposes in an async style.
 
 ![Tests](https://github.com/boergegrunicke/simulated-iot/actions/workflows/python-tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/boergegrunicke/simulated-iot/branch/main/graph/badge.svg)](https://codecov.io/gh/DEIN_NUTZERNAME/pysimulated-iot)
 
 ## Overview
 
