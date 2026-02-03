@@ -10,18 +10,18 @@ def test_background_update_once_simulation_disabled():
 def test_background_update_once_other_type():
     """Should cover _background_update_once for an unknown device type (else branch)."""
     hub = SimulatedHub()
-    # Add a dummy device
+    # Only use the dummy device for this test
+    hub.devices = {}
     class DummyDevice:
         pass
     dummy = DummyDevice()
     dummy.id = "dummy_1"
     dummy.name = "Dummy"
     dummy.type = "other"
-    dummy.state = 0
+    dummy.state = 42
     dummy.simulation_enabled = True
     # update_state returns True so the callback is triggered and the else branch is covered
     dummy.update_state = lambda new_state: True
-    dummy.state = 42
     hub.devices["dummy_1"] = dummy
     called = []
     hub.register_callback(lambda device_id, state: called.append((device_id, state)))

@@ -64,7 +64,8 @@ class SimulatedHub:
                     else:
                         changed = False
                 else:
-                    changed = False
+                    # For unknown device types, call update_state and use its return value
+                    changed = device.update_state(device.state)
                 # Only fire callback if state actually changed
                 if changed:
                     for callback in self._callbacks:
